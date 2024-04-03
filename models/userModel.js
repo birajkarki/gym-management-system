@@ -2,15 +2,15 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 
 const userSchema = new mongoose.Schema({
-  email: {
+  username: {
     type: String,
     unique: true,
     required: true,
   },
   password: String, // Field for local authentication (email/password)
-  githubId: String, // Field for GitHub authentication
-  githubUsername: String, // Field for GitHub authentication
-  githubAccessToken: String,
+  // githubId: String, // Field for GitHub authentication
+  // githubUsername: String, // Field for GitHub authentication
+  // githubAccessToken: String,
 })
 
 // Hash password before saving (for local authentication)

@@ -1,41 +1,64 @@
+// config/passportConfig.js
 const passport = require('passport')
-const bcrypt = require('bcrypt')
-const GitHubStrategy = require('passport-github').Strategy
-const User = require('../models/userModel')
+const LocalStrategy = require('passport-local').Strategy
+const JWTStrategy = require('passport-jwt').Strategy
+const ExtractJwt = require('passport-jwt').ExtractJwt
 
-passport.use(User.createStrategy())
-passport.serializeUser(User.serializeUser())
-passport.deserializeUser(User.deserializeUser())
-
+// Example configuration for LocalStrategy
 passport.use(
-  new GitHubStrategy(
+  new LocalStrategy(function (username, password, done) {
+    // Logic to authenticate user
+    // Example:
+    User.findOne({ username: username }, function (err, user) {
+      if (err) {
+        return done(err)
+      }
+      if (!user) {
+        return done(null, false)
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false)
+      }
+      return done(null, user)
+    })
+  })
+)
+
+// Example configuration for JWTStrategy
+passport.use(
+  new JWTStrategy(
     {
-      clientID: GITHUB_CLIENT_ID,
-      clientSecret: GITHUB_CLIENT_SECRET,
-      callbackURL: 'http://localhost:3000/auth/github/callback',
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      secretOrKey: 'your_jwt_secret',
     },
-    function (accessToken, refreshToken, profile, done) {
-      // GitHub authentication logic
-      User.findOne({ githubId: profile.id }, function (err, user) {
+    function (jwt_payload, done) {
+      // Logic to authenticate user using JWT
+      // Example:
+      User.findById(jwt_payload.sub, function (err, user) {
         if (err) {
-          return done(err)
+          return done(err, false)
         }
-        if (!user) {
-          // Create a new user if not found
-          const newUser = new User({
-            githubId: profile.id,
-            githubUsername: profile.username,
-            githubAccessToken: accessToken,
-          })
-          newUser.save(function (err) {
-            if (err) return done(err)
-            return done(null, newUser)
-          })
-        } else {
-          // User already exists, return the user
+        if (user) {
           return done(null, user)
+        } else {
+          return done(null, false)
+          // or you could create a new account
         }
       })
     }
   )
 )
+// Serialize and deserialize user
+passport.serializeUser((user, done) => {
+  done(null, user.id)
+})
+
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await User.findById(id)
+    done(null, user)
+  } catch (error) {
+    done(error)
+  }
+})
+module.exports = passport
