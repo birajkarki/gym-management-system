@@ -1,64 +1,51 @@
 const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcryptjs')
-const passport = require('passport') // Import Passport for GitHub authentication
 const User = require('../models/userModel')
 
-// Registration route
-router.post('/register', async (req, res) => {
+router.post('/signup', async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10)
-    const user = new User({
-      email: req.body.email,
+    const user = await User.findOne({
+      username: req.body.username,
+    })
+    if (user) {
+      return res.status(409).send('User already exists')
+    }
+    const newUser = new User({
+      username: req.body.username,
       password: hashedPassword,
     })
-    await user.save()
-    res.redirect('/dashboard')
-  } catch (error) {
-    if (error.code === 11000 && error.keyPattern.email) {
-      // Duplicate email error
-      return res.render('signup', {
-        errorMessage:
-          'Email already exists. Please choose a different email address.',
-      })
-    }
-    console.error('Error registering user:', error.message)
-    res.status(500).send('Error registering user')
-  }
-})
-
-// Login route
-router.post('/login', async (req, res) => {
-  try {
-    const user = await User.findOne({ email: req.body.email })
-    if (!user) {
-      return res.status(404).send('User not found')
-    }
-    const validPassword = await bcrypt.compare(req.body.password, user.password)
-    if (!validPassword) {
-      return res.status(401).send('Invalid password')
-    }
-    // Generate JWT token
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-      expiresIn: '1h',
-    })
-    // Sign token with expiration
-    // Store token in local storage
-    res.locals.token = token
-    // Redirect user to dashboard upon successful login
-    res.redirect('/dashboard')
-  } catch (error) {
-    res.status(500).send('Error logging in')
-  }
-})
-
-router.post('/logout', function (req, res, next) {
-  req.logout(function (err) {
-    if (err) {
-      return next(err)
-    }
+    await newUser.save()
     res.redirect('/signin')
-  })
+  } catch (error) {
+    res.status(500).send('Error creating user')
+  }
 })
+// Login route
+// router.post('/login', async (req, res) => {
+//   try {
+//     const user = await User.findOne({ email: req.body.email })
+//     if (!user) {
+//       return res.status(404).send('User not found')
+//     }
+//     const validPassword = await bcrypt.compare(req.body.password, user.password)
+//     if (!validPassword) {
+//       return res.status(401).send('Invalid password')
+//     }
+//     res.redirect('/dashboard')
+//   } catch (error) {
+//     res.status(500).send('Error logging in')
+//   }
+// })
+
+// router.post('/logout', function (req, res, next) {
+//   req.logout(function (err) {
+//     if (err) {
+//       return next(err)
+//     }
+//     res.redirect('/signin')
+//   })
+// })
 
 module.exports = router

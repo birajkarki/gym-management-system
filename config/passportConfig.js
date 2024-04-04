@@ -1,58 +1,33 @@
 // config/passportConfig.js
 const passport = require('passport')
+const User = require('../models/userModel')
 const LocalStrategy = require('passport-local').Strategy
-const JWTStrategy = require('passport-jwt').Strategy
-const ExtractJwt = require('passport-jwt').ExtractJwt
 
-// Example configuration for LocalStrategy
 passport.use(
-  new LocalStrategy(function (username, password, done) {
-    // Logic to authenticate user
-    // Example:
-    User.findOne({ username: username }, function (err, user) {
-      if (err) {
-        return done(err)
-      }
-      if (!user) {
-        return done(null, false)
-      }
-      if (!user.validPassword(password)) {
-        return done(null, false)
-      }
-      return done(null, user)
-    })
-  })
-)
-
-// Example configuration for JWTStrategy
-passport.use(
-  new JWTStrategy(
-    {
-      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      secretOrKey: 'your_jwt_secret',
-    },
-    function (jwt_payload, done) {
-      // Logic to authenticate user using JWT
-      // Example:
-      User.findById(jwt_payload.sub, function (err, user) {
-        if (err) {
-          return done(err, false)
+  new LocalStrategy(
+    { usernameField: 'email' },
+    async (email, password, done) => {
+      try {
+        const user = await User.findOne({ email })
+        if (!user) {
+          return done(null, false, { message: 'Incorrect email' })
         }
-        if (user) {
-          return done(null, user)
-        } else {
-          return done(null, false)
-          // or you could create a new account
+        const validPassword = await bcrypt.compare(password, user.password)
+        if (!validPassword) {
+          return done(null, false, { message: 'Incorrect password' })
         }
-      })
+        return done(null, user)
+      } catch (error) {
+        return done(error)
+      }
     }
   )
 )
+
 // Serialize and deserialize user
 passport.serializeUser((user, done) => {
   done(null, user.id)
 })
-
 passport.deserializeUser(async (id, done) => {
   try {
     const user = await User.findById(id)
@@ -61,4 +36,5 @@ passport.deserializeUser(async (id, done) => {
     done(error)
   }
 })
+
 module.exports = passport
