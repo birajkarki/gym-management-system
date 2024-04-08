@@ -1,48 +1,47 @@
 const express = require('express')
-// const passport = require('passport')
-// const authRoutes = require('./routes/authRoutes')
-const passport = require('./config/passportConfig') // Import the configured Passport instance
-const { connectMongoose } = require('./config/database') // Import database configuration
-// const middleware = require('./config/middleware')
+const passport = require('./config/passportConfig')
+const { connectMongoose } = require('./config/database')
 const hbs = require('hbs')
 const path = require('path')
-// const createError = require('http-errors')
 const indexRoutes = require('./routes/index')
 const authRoutes = require('./routes/authRoutes')
 const { isAuthenticated } = require('./middleware/auth')
-
-connectMongoose() // Connect to the database
+const session = require('express-session')
+const dashboardRoutes = require('./routes/dashboard')
+connectMongoose()
 const app = express()
-// Initialize Passport.js
-app.use(passport.initialize())
 
-// View engine setup
+// View engine setup`
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'hbs')
 
 hbs.registerPartials(path.join(__dirname, 'views', 'partials'))
+// Static files and body parsing
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.json())
-app.use(express.urlencoded({ extended: false }))
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.urlencoded({ extended: true }))
 
-// use the routes
+// Session middleware
+app.use(
+  session({
+    secret: 'secret_key',
+    resave: false,
+    saveUninitialized: false,
+  })
+)
+
+// Passport initialization
+app.use(passport.initialize())
+app.use(passport.session())
+
+// Routes
 app.use('/', indexRoutes)
-app.use('/register', authRoutes) // Mount authRoutes at /register
+app.use('/auth', authRoutes)
+app.use('/dashboard', dashboardRoutes)
+
+// Protected route
 app.use('/protected-route', isAuthenticated, (req, res, next) => {
   res.send('This is a protected route')
 })
-// hbs.registerPartials(path.join(__dirname, 'views', 'layouts'))
-// hbs.registerPartials(path.join(__dirname, 'views', 'orderViews'))
 
-// Middleware setup
-// app.use(middleware)
-
-// Passport.js configuration
-// passportConfig(passport) // Assuming passportConfig is a function that configures Passport.js
-
-// Authentication routes
-// app.use(authRoutes)
-
-// Start the server
 module.exports = app

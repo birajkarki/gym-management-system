@@ -1,0 +1,30 @@
+<!-- Membership Plan Form -->
+<form
+  id='addMembershipPlanForm'
+  method='POST'
+  action='/dashboard/membership-plans'
+>
+  <div class='form-group'>
+    <label for='plan_name'>Plan Name</label>
+    <input
+      type='text'
+      class='form-control'
+      id='plan_name'
+      name='plan_name'
+      required
+    />
+    <div class='invalid-feedback'>Please enter a plan name.</div>
+  </div>
+  <div class='form-group'>
+    <label for='plan_price'>Plan Price</label>
+    <input
+      type='number'
+      class='form-control'
+      id='plan_price'
+      name='plan_price'
+      required
+    />
+    <div class='invalid-feedback'>Please enter a plan price.</div>
+  </div>
+  <button type='submit' class='btn btn-primary'>Add Plan</button>
+</form>
