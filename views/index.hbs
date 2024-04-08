@@ -3,140 +3,143 @@
     <meta charset='UTF-8' />
     <meta name='viewport' content='width=device-width, initial-scale=1.0' />
     <title>Gym Landing Page</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
     <!-- Custom CSS -->
     <style>
-      /* Custom styles */ body { font-family: Arial, sans-serif; margin: 0;
-      padding: 0; background-color: #f8f9fa; } .hero-section { background-image:
-      url('https://source.unsplash.com/featured/?gym'); /* Image from Unsplash
-      */ background-size: cover; color: #fff; padding: 100px 20px; text-align:
-      center; } .hero-section h1 { font-size: 3rem; margin-bottom: 20px;
-      text-transform: uppercase; } .hero-section p { font-size: 1.5rem;
-      margin-bottom: 40px; } .cta-button { background-color: #dc3545;
-      border-color: #dc3545; color: #fff; padding: 15px 30px; font-size: 1.2rem;
-      text-transform: uppercase; border-radius: 5px; transition:
-      background-color 0.3s ease-in-out; text-decoration: none; /* Remove
-      underline */ display: inline-block; /* Make it inline-block for padding */
-      } .cta-button:hover { background-color: #c82333; } .about-section {
-      background-color: #fff; padding: 100px 20px; text-align: center; }
-      .about-section h2 { font-size: 2.5rem; margin-bottom: 30px; color:
-      #343a40; } .about-section p { font-size: 1.2rem; margin-bottom: 40px;
-      color: #343a40; text-align: left; } .feature-section { background-color:
-      #f8f9fa; padding: 100px 20px; text-align: center; } .feature-section h2 {
-      font-size: 2.5rem; margin-bottom: 30px; color: #343a40; } .feature-section
-      p { font-size: 1.2rem; margin-bottom: 40px; color: #343a40; text-align:
-      left; } .feature-item { margin-bottom: 30px; } .feature-item h3 {
-      font-size: 2rem; margin-bottom: 20px; color: #343a40; text-align: left; }
+      /* Custom styles */
+      body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; }
+      .hero-section { background-image: url('https://source.unsplash.com/featured/?gym'); /* Image from Unsplash */ background-size: cover; color: #fff; padding: 100px 20px; text-align: center; }
+      .hero-section h1 { font-size: 3rem; margin-bottom: 20px; text-transform: uppercase; }
+      .hero-section p { font-size: 1.5rem; margin-bottom: 40px; }
+      .cta-button { background-color: #dc3545; border-color: #dc3545; color: #fff; padding: 15px 30px; font-size: 1.2rem; text-transform: uppercase; border-radius: 5px; transition: background-color 0.3s ease-in-out; text-decoration: none; /* Remove underline */ display: inline-block; /* Make it inline-block for padding */ }
+      .cta-button:hover { background-color: #c82333; }
+      .about-section { background-color: #fff; padding: 100px 20px; text-align: center; }
+      .about-section h2 { font-size: 2.5rem; margin-bottom: 30px; color: #343a40; }
+      .about-section p { font-size: 1.2rem; margin-bottom: 40px; color: #343a40; text-align: left; }
+      .feature-section { background-color: #f8f9fa; padding: 100px 20px; text-align: center; }
+      .feature-section h2 { font-size: 2.5rem; margin-bottom: 30px; color: #343a40; }
+      .feature-section p { font-size: 1.2rem; margin-bottom: 40px; color: #343a40; text-align: left; }
+      .feature-item { margin-bottom: 30px; }
+      .feature-item h3 { font-size: 2rem; margin-bottom: 20px; color: #343a40; text-align: left; }
       .feature-item p { font-size: 1.2rem; color: #343a40; text-align: left; }
-      .image-text-container { display: flex; flex-direction: row;
-      justify-content: space-between; align-items: center; }
+      .image-text-container { display: flex; flex-direction: row; justify-content: space-between; align-items: center; }
       .image-text-container .text { flex: 1; padding-right: 20px; }
-      .image-text-container img { flex: 1; max-width: 100%; height: auto; /*
-      Maintain aspect ratio */ max-height: 300px; /* Set maximum height */ }
-      .contact-section { background-color: #dc3545; padding: 100px 20px;
-      text-align: center; } .contact-section h2 { font-size: 2.5rem;
-      margin-bottom: 30px; color: #fff; } .contact-section p { font-size:
-      1.2rem; margin-bottom: 40px; color: #fff; } /* Responsive styles */ @media
-      (max-width: 768px) { .hero-section { padding: 80px 20px; } .hero-section
-      h1 { font-size: 2.5rem; } .hero-section p { font-size: 1.2rem; }
-      .about-section { padding: 80px 20px; } .about-section h2 { font-size:
-      2rem; } .about-section p { font-size: 1rem; } .feature-section { padding:
-      80px 20px; } .feature-section h2 { font-size: 2rem; } .feature-section p {
-      font-size: 1rem; } .contact-section { padding: 80px 20px; }
-      .contact-section h2 { font-size: 2rem; } .contact-section p { font-size:
-      1rem; } .image-text-container { flex-direction: column; align-items:
-      center; } .image-text-container img { max-width: 100%; max-height: 200px;
-      /* Reduced height for smaller screens */ margin-top: 20px; }
-      .image-text-container .text { padding: 0; text-align: center; } }
+      .image-text-container img { flex: 1; max-width: 100%; height: auto; /* Maintain aspect ratio */ max-height: 300px; /* Set maximum height */ }
+      .contact-section { background-color: #dc3545; padding: 100px 20px; text-align: center; }
+      .contact-section h2 { font-size: 2.5rem; margin-bottom: 30px; color: #fff; }
+      .contact-section p { font-size: 1.2rem; margin-bottom: 40px; color: #fff; }
+      /* Responsive styles */
+      @media (max-width: 768px) {
+        .hero-section { padding: 80px 20px; }
+        .hero-section h1 { font-size: 2.5rem; }
+        .hero-section p { font-size: 1.2rem; }
+        .about-section { padding: 80px 20px; }
+        .about-section h2 { font-size: 2rem; }
+        .about-section p { font-size: 1rem; }
+        .feature-section { padding: 80px 20px; }
+        .feature-section h2 { font-size: 2rem; }
+        .feature-section p { font-size: 1rem; }
+        .contact-section { padding: 80px 20px; }
+        .contact-section h2 { font-size: 2rem; }
+        .contact-section p { font-size: 1rem; }
+        .image-text-container { flex-direction: column; align-items: center; }
+        .image-text-container img { max-width: 100%; max-height: 200px; /* Reduced height for smaller screens */ margin-top: 20px; }
+        .image-text-container .text { padding: 0; text-align: center; }
+      }
     </style>
   </head>
   <body>
-    {{> header}}
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Elite Fitness</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#features">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
 
     <section class='hero-section'>
-      <h1>Welcome to Elite Fitness</h1>
-      <p>Your journey to a healthier lifestyle starts here.</p>
-      <a href='#about' class='cta-button'>Explore More</a>
+      <div class="container">
+        <h1>Welcome to Elite Fitness</h1>
+        <p>Your journey to a healthier lifestyle starts here.</p>
+        <a href='#about' class='btn btn-danger btn-lg'>Explore More</a>
+      </div>
     </section>
 
     <section id='about' class='about-section'>
-      <h2>About Us</h2>
-      <div class='image-text-container'>
-        <div class='text'>
-          <p>Elite Fitness is more than just a gym. We're a community committed
-            to helping you reach your fitness goals and lead a healthier life.</p>
-        </div>
-        <img
-          src='https://source.unsplash.com/featured/?gym'
-          alt='About Us Image'
-        />
-      </div>
-    </section>
-
-    <section class='feature-section'>
-      <h2>Our Features</h2>
-      <div class='row'>
-        <div class='col-md-4'>
-          <div class='image-text-container'>
-            <div class='text'>
-              <h3>State-of-the-Art Facilities</h3>
-              <p>Our gym features top-of-the-line equipment and modern amenities
-                to enhance your workout experience.</p>
-            </div>
-            <img
-              src='https://source.unsplash.com/featured/?weights'
-              alt='State-of-the-Art Facilities'
-            />
+      <div class="container">
+        <h2>About Us</h2>
+        <div class='image-text-container'>
+          <div class='text'>
+            <p>Elite Fitness is more than just a gym. We're a community committed to helping you reach your fitness goals and lead a healthier life.</p>
           </div>
-        </div>
-        <div class='col-md-4'>
-          <div class='image-text-container'>
-            <div class='text'>
-              <h3>Expert Trainers</h3>
-              <p>Our certified trainers are dedicated to providing personalized
-                guidance and support to help you achieve results.</p>
-            </div>
-            <img
-              src='https://source.unsplash.com/featured/?trainer'
-              alt='Expert Trainers'
-            />
-          </div>
-        </div>
-        <div class='col-md-4'>
-          <div class='image-text-container'>
-            <div class='text'>
-              <h3>Group Classes</h3>
-              <p>Join our group fitness classes and challenge yourself while
-                having fun with like-minded individuals.</p>
-            </div>
-            <img
-              src='https://source.unsplash.com/featured/?gym'
-              alt='Group Classes'
-            />
-
-          </div>
+          <img src='https://source.unsplash.com/featured/?gym' class="img-fluid" alt='About Us Image'>
         </div>
       </div>
     </section>
-
-    <section class='contact-section'>
-      <h2>Contact Us</h2>
-      <div>
-        <!-- Here you can embed a map of Nepal -->
-        <iframe
-          src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28469.21728234983!2d83.96301589999999!3d28.394857850000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19c1504bd7c1%3A0xf9349c4e816f051e!2sNepal!5e0!3m2!1sen!2sus!4v1649312942691!5m2!1sen!2sus'
-          width='600'
-          height='450'
-          style='border:0;'
-          allowfullscreen=''
-          loading='lazy'
-        ></iframe>
+<section id="features" class='feature-section' style='padding: 50px 0; background-color: #f8f9fa; text-align: center;'>
+  <div class="container">
+    <h2 style='margin-bottom: 50px; color: #333;'>Our Features</h2>
+    <div class='row'>
+      <div class='col-md-4'>
+        <div class='feature-card' style='background-color: #fff; border-radius: 10px; overflow: hidden;'>
+          <img src='images/gym1.jpg' class="img-fluid" alt='State-of-the-Art Facilities'>
+          <div class='text' style='padding: 20px;'>
+            <h3>State-of-the-Art Facilities</h3>
+            <p>Our gym features top-of-the-line equipment and modern amenities to enhance your workout experience.</p>
+          </div>
+        </div>
       </div>
-      <p>Ready to start your fitness journey with Elite Fitness? Contact us
-        today.</p>
-      <a href='#' class='cta-button'>Get in Touch</a>
+      <div class='col-md-4'>
+        <div class='feature-card' style='background-color: #fff; border-radius: 10px; overflow: hidden;'>
+          <img src='images/gym2.jpg' class="img-fluid" alt='Expert Trainers'>
+          <div class='text' style='padding: 20px;'>
+            <h3>Expert Trainers</h3>
+            <p>Our certified trainers are dedicated to providing personalized guidance and support to help you achieve results.</p>
+          </div>
+        </div>
+      </div>
+      <div class='col-md-4'>
+        <div class='feature-card' style='background-color: #fff; border-radius: 10px; overflow: hidden;'>
+          <img src='images/gym3.jpg' class="img-fluid" alt='Group Classes'>
+          <div class='text' style='padding: 20px;'>
+            <h3>Group Classes</h3>
+            <p>Join our group fitness classes and challenge yourself while having fun with like-minded individuals.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <section id='contact' class='contact-section'>
+      <div class="container">
+        <h2>Contact Us</h2>
+        <div>
+          <!-- Here you can embed a map of Nepal -->
+<iframe src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11314405.864462757!2d112.3867824479822!3d-25.734968081420545!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2b2d83ecbfb29813%3A0x7a1fc3cd55e3a32!2sAustralia!5e0!3m2!1sen!2sus!4v1649441219733!5m2!1sen!2sus' width='600' height='450' style='border:0;' allowfullscreen='' loading='lazy'></iframe>
+        </div>
+        <p>Ready to start your fitness journey with Elite Fitness? Contact us today.</p>
+        <a href='#' class='btn btn-light btn-lg'>Get in Touch</a>
+      </div>
     </section>
+   {{!-- new  --}}
+   
+
     <!-- Include shared footer -->
     {{> footer}}
 
@@ -144,5 +147,5 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
+  </body>
 </html>
