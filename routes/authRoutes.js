@@ -12,7 +12,8 @@ router.post('/register', async (req, res) => {
       password: hashedPassword,
     })
     await user.save()
-    res.redirect('/dashboard') // Redirect to dashboard or any other route
+    res.status(201).send('User registered successfully')
+    // res.redirect('/dashboard') // Redirect to dashboard or any other route
   } catch (error) {
     if (error.code === 11000 && error.keyPattern.username) {
       // Duplicate username error
