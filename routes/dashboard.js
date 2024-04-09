@@ -36,7 +36,7 @@ router.post('/members', async (req, res) => {
       address,
       membership_start_date,
       membership_end_date,
-      membership_plan, // Assuming membership_plan contains the plan's name
+      membership_plan,
       discount_percentage,
     })
 
@@ -67,7 +67,7 @@ router.delete('/members/:id', async (req, res) => {
 // Route to update a member
 router.put('/members/:id', async (req, res) => {
   const memberId = req.params.id
-  const updatedData = req.body // Assuming updated data is sent in the request body
+  const updatedData = req.body
   try {
     // Find the member by ID and update it with the new data
     const updatedMember = await Member.findByIdAndUpdate(

@@ -12,8 +12,8 @@ router.post('/register', async (req, res) => {
       password: hashedPassword,
     })
     await user.save()
-    res.status(201).send('User registered successfully')
-    // res.redirect('/dashboard') // Redirect to dashboard or any other route
+    // res.status(201).send('User registered successfully')
+    res.redirect('/dashboard')
   } catch (error) {
     if (error.code === 11000 && error.keyPattern.username) {
       // Duplicate username error
@@ -22,7 +22,7 @@ router.post('/register', async (req, res) => {
           'Username already exists. Please choose a different username.',
       })
     }
-    console.error('Error registering user:', error) // Log the entire error object
+    console.error('Error registering user:', error)
     res.status(500).send('Error registering user')
   }
 })
@@ -38,7 +38,7 @@ router.post('/login', async (req, res) => {
     if (!validPassword) {
       return res.status(401).send('Invalid password')
     }
-    res.redirect('/dashboard') // Redirect to dashboard or any other route
+    res.redirect('/dashboard') // Redirect to dashboard
   } catch (error) {
     console.error('Error logging in:', error) // Log the entire error object
     res.status(500).send('Error logging in')
@@ -47,9 +47,7 @@ router.post('/login', async (req, res) => {
 
 // Logout route
 router.post('/logout', function (req, res, next) {
-  // Implement logout functionality here (e.g., session management or token invalidation)
   // After logout, redirect users to the appropriate route
-  // For example:
   // req.logout(function (err) {
   //   if (err) {
   //     return next(err);
